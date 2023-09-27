@@ -1,5 +1,6 @@
 import { useState } from "react";
-
+import ThemeContext, {themes} from "./componentes/context"
+import Tarjeta from "./componentes/Tarjeta"
 import "./index.css";
 
 // CONSIGNAS EN APP:
@@ -14,26 +15,46 @@ import "./index.css";
 function App() {
   const [temaOscuro, setTemaOscuro] = useState(false);
   const [favorita, setFavorita] = useState("");
-
+  
+  
 
   const handleTema = () => {
+    temaOscuro === themes.dark ? setTemaOscuro(themes.light) : setTemaOscuro(themes.dark);
    
   };
 
-  const handleFavorita = () => {
+  const handleFavorita = (favs) => {
+
+    setFavorita([...favorita, favs])
+
+    
+
+     
+
   
   };
 
   return (
-    <div id="App" className={temaOscuro ? "dark" : ""}>
+    <ThemeContext.Provider value={{ temaOscuro, handleTema}}>
+    <div id="App" 
+    className={temaOscuro ? "dark" : ""}
+    >
       <h1>¡Bienvenidos!</h1>
       <h2>Contanos, ¿cuál es tu plataforma favorita?</h2>
       { favorita !== "" ? (<h4 className={ favorita === "Twitter" ? "tw" : favorita === "Facebook" ? "fb" : "yt" }> {favorita}</h4>) : ("")}
 
       {/* 🚩 Implementar acá */}
 
-      <button>Cambiar tema</button>
+      <Tarjeta handleFavoritas={handleFavorita}/>
+
+      <button
+       onClick={handleTema}
+       style={{ background: temaOscuro.background, color: temaOscuro.font }}
+      >
+        Cambiar tema
+        </button>
     </div>
+    </ThemeContext.Provider>
   );
 }
 

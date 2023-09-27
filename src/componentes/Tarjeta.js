@@ -1,3 +1,5 @@
+import Item from "./Item";
+
 const listadoPlataformas = ["Twitter", "Facebook", "Youtube"];
 
 // CONSIGNAS EN TARJETA:
@@ -12,9 +14,17 @@ const listadoPlataformas = ["Twitter", "Facebook", "Youtube"];
 // PROPS: Listado recibe el método heredado de App y se lo pasa a cada Item.
 
 export default function Tarjeta(props) {
+
+  console.log("prop"+1)
+
   return (
     <ul>
       {/* 🚩 Implementar acá */}
+      {listadoPlataformas.map((it, i) =>{
+        <div key={i}>
+          <Item nombre={it.nombre}/>
+        </div>
+      })}
     </ul>
   );
 }

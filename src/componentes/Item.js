@@ -6,11 +6,23 @@
 // ESTADO: Item no necesita manejar un estado.
 // MÉTODOS: Item no requiere de métodos.
 // PROPS: Item recibe como props el método para modificar la plataforma favorita y su respectivo nombre como contenido.
+import { useContext } from "react";
+import ThemeContext from "../componentes/context"
 
 export default function Item(props) {
-    return (
+  
+  
+  const{temaOscuro} = useContext(ThemeContext,  handleTema);
+  
+  return (
       <>
-          // 🚩
+          <ul>
+            <li>
+              <div style={{ background: temaOscuro.background, color: temaOscuro.font }}>
+              <h1>{it}</h1>
+              </div>
+            </li>
+          </ul>
       </>
     );
   }
